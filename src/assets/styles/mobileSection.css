@@ -1,0 +1,165 @@
+@media screen and (min-width: 300px) and (max-width: 1000px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100vw;
+        height: 160vh;
+        background-color: rgba(39, 39, 38, 255);
+        color: #bcb5b5;
+        overflow: hidden;
+    }
+
+    .title {
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .title .main img {
+        z-index: 2;
+        height: 200px;
+        width: 200px;
+        transition: opacity 0.3ms ease-in-out;
+    }
+
+    .title .png .sun {
+        display: none;
+    }
+
+    .title .png .tree {
+        display: none;
+    }
+
+    .title .png .moon {
+        display: none;
+    }
+
+    .title .png .city {
+        display: none;
+    }
+
+    .title .main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .title .mode {
+        display: none;
+    }
+
+    .container .title .h1 {
+        margin-top: 10px;
+        font-size: 3rem;
+    }
+
+    .container .title .h4 {
+        font-size: 1.5rem;
+    }
+    .phno .icon{
+        display: none;
+    }
+    .info .given-info .data {
+        position: relative;
+        top: -54px;
+        left: 80px;
+        font-size: 1rem;
+      }
+    .contact {
+        display: flex;
+  width: 100vw;
+  flex-direction: column;
+  align-items: center;
+    }
+
+    .contact .info {
+        display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    }
+
+    .contact .ver-line {
+        display: none;
+    }
+    .credentials .phno {
+        margin-left: 0px;
+        justify-content: center;
+        display: flex;
+        width: 100vw;
+      }
+      .credentials .email {
+        margin-left: 0px;
+        justify-content: center;
+        display: flex;
+        width: 100vw;
+      }
+    .contact .credentials {
+        margin-top: 140px;
+        width: 100%;
+    }
+
+    .credentials .cred {
+        border-radius: 10px;
+    background-color: rgb(31, 31, 30);
+    width: 86%;
+    margin-top: 21px;
+      }
+    
+      .credentials .cred1 {
+        z-index: 3;
+        border-radius: 10px;
+        background-color: rgb(31, 31, 30);
+        width: 86%;
+        margin-top: 20px;
+        top: 0px;
+        position: relative;
+        left: 2px;
+      }
+    .credentials button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 150px;
+        height: 40px;
+        margin-top: 20px;
+        font-size: 1.3rem;
+    }
+    .map.location {
+        z-index: 100;
+        width: 300px;
+        height: 200px;
+        position: absolute;
+        left: 100px;
+        bottom: -800px;
+      }
+    .contact .info .given-info {
+        z-index: 3;
+        border-radius: 10px;
+        width: 87%;
+        margin-top: 50px;
+        height: 70px;
+        background-color: #1f1f1e;
+      }
+}
+
+@media screen and (min-width: 500px) and (max-width: 1000px) {
+    .credentials .email {
+        margin-left: 0px;
+        justify-content: center;
+        display: flex;
+        width: 100vw;
+        position: relative;
+        left: 24px;
+      }
+      .credentials .phno {
+        margin-left: 0px;
+        justify-content: center;
+        display: flex;
+        width: 100vw;
+        position: relative;
+        left: 24px;
+      }
+    
+}

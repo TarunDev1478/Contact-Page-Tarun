@@ -1,0 +1,196 @@
+import React, { useState, useRef, useEffect } from 'react';
+import '../assets/styles/contactSection.css'
+import TextField from '@mui/material/TextField';
+import { styled } from '@mui/material/styles';
+import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
+import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
+import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded';
+import DoneIcon from '@mui/icons-material/Done';
+import CloseIcon from '@mui/icons-material/Close';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
+
+import Switch from '@mui/material/Switch';
+
+
+function ContactSection() {
+    const [mode, setMode] = useState('off');
+    const PinkSwitch = styled(Switch)(({ theme }) => ({
+        '& .MuiSwitch-switchBase.Mui-checked': {
+            color: pink[600],
+            '&:hover': {
+                backgroundColor: alpha(pink[600], theme.palette.action.hoverOpacity),
+            },
+        },
+        '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+            backgroundColor: pink[600],
+        },
+    }));
+
+    const label = { inputProps: { 'aria-label': 'Color switch demo' } };
+
+
+    const CssTextField = styled(TextField)({
+        '& .MuiInputBase-root': {
+            color: mode == 'on' ? 'white' : '#bcb5b5',
+            borderColor: '#1f1f1e '
+        },
+        "& .MuiInputLabel-root": { color: mode == 'on' ? 'white' : '#bcb5b5' },
+        '& label.Mui-focused': {
+            color: '#bcb5b5 ',
+        },
+        '& .MuiInput-underline:after': {
+            borderBottomColor: '#bcb5b5 ',
+            color: '#bcb5b5 '
+        },
+        '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+                borderColor: '#1f1f1e ',
+                color: '#bcb5b5 ',
+                borderRadius: "10px"
+            },
+            '&:hover fieldset': {
+                borderColor: '#bcb5b5 ',
+                color: '#bcb5b5 '
+            },
+            '&.Mui-focused fieldset': {
+                borderColor: '#bcb5b5 ',
+                color: '#bcb5b5 '
+            },
+        },
+    });
+    const scripturl = 'https://script.google.com/macros/s/AKfycbwxQHgkwUDZKoJMaYeuZzbc_f9SXhm5s6p8FbaQltLBVUeC_ttD-uE1f_o1-nvCTqKD7A/exec'
+    const [name, setName] = useState();
+    const [email, setEmail] = useState();
+    const [phno, setPhno] = useState();
+    const [message, setMessage] = useState();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // const nameRef = useRef(null);
+    // const emailRef = useRef(null);
+    // const phnoRef = useRef(null);
+    // const messageRef = useRef(null);
+    // useEffect(() => {
+    //     // Set focus to the first input when the component mounts
+    //     nameRef.current.focus();
+    // }, []);
+    const submitForm = (e) => {
+        e.preventDefault();
+        if (!name || !email || !phno || !message) {
+            alert("Please fill out all required fields.");
+            return;
+        }
+        if (!emailRegex.test(email)) {
+            alert("Please enter a valid email address.");
+            return;
+        }
+
+        if (!/^\d{10}$/.test(phno)) {
+            alert("Please enter a valid 10-digit phone number.");
+            return;
+        }
+        const formData = new FormData();
+        formData.append('Name1', name);
+        formData.append('Email1', email);
+        formData.append('Phno1', phno);
+        formData.append('Message1', message);
+        fetch(scripturl, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert("Thank you for contacting us! Your form has been submitted successfully!");
+                } else {
+                    throw new Error('Network response was not ok.');
+                }
+            })
+            .then(() => { window.location.reload(); })
+            .catch(error => console.error('Error!', error.message));
+    };
+
+
+    return (
+        <div>
+            <div className="container" style={{ backgroundColor: mode == "on" ? 'white' : '' }}>
+                <div className="title">
+                    <div className="main">
+                        <div className='h4' style={{ color: mode == "on" ? '#455d58' : '' }}>get in touch</div>
+                        <div className='h1' style={{ color: mode == "on" ? '#455d58' : '' }}>CONTACT</div>
+                    </div>
+                    <div className="mode">
+                        <DarkModeIcon style={{ display: mode === "on" ? 'none' : '', cursor: 'pointer' }} />
+                        <LightModeIcon style={{ display: mode === "on" ? '' : 'none', cursor: 'pointer' }} />
+                        <Switch {...label} onChange={(e) => { setMode(e.target.checked ? "on" : "off") }} color="warning" />
+                    </div>
+                </div>
+                <div className="contact">
+                    <div className="info">
+                        <div className="given-info" style={{ backgroundColor: mode == "on" ? '#3e5650' : '', color: mode == 'on' ? 'white' : '#bcb5b5' }}><PhoneAndroidIcon sx={{ fontSize: 40, padding: 2 }} /><div className='data'>+91-7985706039 </div> </div>
+                        <div className="given-info" style={{ backgroundColor: mode == "on" ? '#3e5650' : '', color: mode == 'on' ? 'white' : '#bcb5b5' }}><EmailRoundedIcon sx={{ fontSize: 40, padding: 2 }} /><div className='data'>tarunkumar147800@gmail.com</div> </div>
+                        <div className="given-info" style={{ backgroundColor: mode == "on" ? '#3e5650' : '', color: mode == 'on' ? 'white' : '#bcb5b5' }}><LocationOnRoundedIcon sx={{ fontSize: 40, padding: 2 }} /><div className='data'>Kanpur, UttarPradesh</div></div>
+                    </div>
+                    <div className="ver-line"></div>
+                    <div className="credentials">
+                        <form method='post' name='forms' action="" style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+                            <CssTextField
+                                style={{ backgroundColor: mode == "on" ? '#3e5650' : '' }}
+                                className="cred"
+                                required
+                                onChange={(e) => setName(e.target.value)} 
+                                name='Name1'
+                                label="Name"
+                                id="custom-css-outlined-input"
+                            />
+                            <div className="email">
+                             <CssTextField
+                                    style={{ backgroundColor: mode == "on" ? '#3e5650' : ''}}
+                                    className="cred"
+                                    required
+                                    onChange={(e) => { setEmail(e.target.value) }}
+                                    name='Email1'
+                                    label="Email"
+                                    type="email"
+                                    id="custom-css-outlined-input"
+                                />
+                                <DoneIcon style={{ display: emailRegex.test(email) ? 'flex' : 'none',color: mode=='on'?'#3e5650':'#bcb5b5' }} sx={{ fontSize: 40, paddingTop: 2, paddingLeft: 2 }} />
+                                <CloseIcon style={{ display: emailRegex.test(email) ? 'none' : 'flex' ,color: mode=='on'?'#3e5650':'#bcb5b5'}} sx={{ fontSize: 40, paddingTop: 2, paddingLeft: 2 }} />
+                            </div>
+                            <div className="phno">
+                                <CssTextField
+                                    style={{ backgroundColor: mode == "on" ? '#3e5650' : ''}}
+                                    className="cred"
+                                    type='tel'
+                                    required
+                                    onChange={(e) => { setPhno(e.target.value) }}
+                                    name='Phno1'
+                                    label="Phone Number"
+                                    pattern="[0-9]{10}"
+                                    id="custom-css-outlined-input"
+                                />
+                                <DoneIcon style={{ display: /^\d{10}$/.test(phno) ? 'flex' : 'none' ,color: mode=='on'?'#3e5650':'#bcb5b5'}} sx={{ fontSize: 40, paddingTop: 2, paddingLeft: 2 }} />
+                                <CloseIcon style={{ display: /^\d{10}$/.test(phno) ? 'none' : 'flex' ,color: mode=='on'?'#3e5650':'#bcb5b5'}} sx={{ fontSize: 40, paddingTop: 2, paddingLeft: 2 }} />
+                            </div>
+
+                            <CssTextField
+                                style={{ backgroundColor: mode == "on" ? '#3e5650' : '' }}
+                                className="cred"
+                                required
+                                onChange={(e) => setMessage(e.target.value)} 
+                                name='Message1'
+                                maxRows={7}
+                                multiline
+                                label="Message"
+                                id="custom-css-outlined-input"
+                            />
+
+                            <button style={{ color: mode == 'on' ? 'white' : 'black', backgroundColor: mode == 'on' ? '#3e5650' : 'white' }} onClick={(e) => submitForm(e)}>Send</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default ContactSection;
