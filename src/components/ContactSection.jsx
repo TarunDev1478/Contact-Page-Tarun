@@ -13,6 +13,7 @@ import '../assets/styles/mobileSection.css'
 import Switch from '@mui/material/Switch';
 import zIndex from '@mui/material/styles/zIndex';
 
+//Styled component for customizing MUI TextField for styling textfields
 const CssTextField = styled(TextField)({
     '& .MuiInputBase-root': {
         color: '#bcb5b5',
@@ -43,7 +44,10 @@ const CssTextField = styled(TextField)({
     },
 });
 
+//for styled slider
 const label = { inputProps: { 'aria-label': 'Color switch demo' } };
+
+// this is for getting windowQidth increase responsiveness
 function ContactSection(props) {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -57,6 +61,7 @@ function ContactSection(props) {
         };
     }, []);
 
+    //url or api link for google spreadsheets
     const scripturl = 'https://script.google.com/macros/s/AKfycbwxQHgkwUDZKoJMaYeuZzbc_f9SXhm5s6p8FbaQltLBVUeC_ttD-uE1f_o1-nvCTqKD7A/exec'
     const [name, setName] = useState();
     const [email, setEmail] = useState();
@@ -64,17 +69,19 @@ function ContactSection(props) {
     const [message, setMessage] = useState();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+    //function to submit form
     const submitForm = (e) => {
         e.preventDefault();
         if (!name || !email || !phno || !message) {
             alert("Please fill out all required fields.");
             return;
         }
+        //for emali validation
         if (!emailRegex.test(email)) {
             alert("Please enter a valid email address.");
             return;
         }
-
+        // for phno validaion
         if (!/^\d{10}$/.test(phno)) {
             alert("Please enter a valid 10-digit phone number.");
             return;
@@ -84,6 +91,7 @@ function ContactSection(props) {
         formData.append('Email1', email);
         formData.append('Phno1', phno);
         formData.append('Message1', message);
+        // making a post request to api for storing form data
         fetch(scripturl, {
             method: 'POST',
             body: formData
